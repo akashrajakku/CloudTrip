@@ -3,3 +3,6 @@ secretNotes.md
 
 #env vars
 .env
+
+#log files
+combined.log

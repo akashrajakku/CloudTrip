@@ -1,7 +1,6 @@
-const dotenv= require('dotenv');
-
-dotenv.config(); // it initializes global  "process", letting us access env via process.env
-
+const serverConfig = require("./server-config");
+const loggerConfig = require('./logger-config');
 module.exports={
-    PORT: process.env.PORT
+    serverConfig,
+    loggerConfig
 }
