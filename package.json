@@ -1,0 +1,24 @@
+{
+  "name": "cloudtrip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "npm-watch",
+    "start": "node ./src/index.js"  
+  },
+  "watch": {
+    "start": {
+      "patterns": ["*.js", "src"],  
+      "extensions": "js,json" 
+    }  
+  },
+  "author": "Akash",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "http-status-codes": "^2.3.0",
+    "npm-watch": "^0.13.0"
+  }
+}
