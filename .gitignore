@@ -6,3 +6,6 @@ secretNotes.md
 
 #log files
 combined.log
+
+#config.json
+src/config/config.json
