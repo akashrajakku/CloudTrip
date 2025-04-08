@@ -6,13 +6,8 @@ class CrudRepo {
     }
 
     async create(data){ // to create/insert any new data
-        try {
-            const response = await this.model.create(data);
-            return response;
-        } catch (error) {
-            logger.error(`An error occurred in Crud-repo : create`);
-            throw error;
-        }
+        const response = await this.model.create(data);
+        return response;
     }
 
     async destroy(data){ //deletion
