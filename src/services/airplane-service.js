@@ -11,10 +11,16 @@ async function createAirplane(data){
     } catch (error) {
         console.log(error);
         
-        if(error.name == 'TypeError'){
-            throw new AppError("Cannot create a new AIrplane object", StatusCodes.INTERNAL_SERVER_ERROR)
+        if(error.name == 'SequelizeValidationError'){
+            let explanation = [];
+            error.errors.forEach(err => {
+                explanation.push(err.message);
+            });
+            console.log(explanation);
+            
+            throw new AppError(explanation, StatusCodes.INTERNAL_SERVER_ERROR)
         }
-        throw error;
+        throw new AppError("Cannot create a new AIrplane object", StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
