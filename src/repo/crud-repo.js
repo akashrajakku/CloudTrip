@@ -18,6 +18,10 @@ class CrudRepo {
                 }
         });
 
+        if(!response){
+            throw new AppError("Airplane not found to delete", StatusCodes.NOT_FOUND);
+        }
+
         return response;
 
     }
