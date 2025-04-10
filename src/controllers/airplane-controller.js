@@ -29,10 +29,34 @@ async function createAirplane(req, res){
 
 async function getAirplanes(req, res){
     try {
-        const airplanes = await AirplaneService.getAirplanes();
+        const id = req.params.id;
+        const airplanes = await AirplaneService.getAirplanes(id);
 
         SuccessResponse.message="Airplanes fetched successfully";
         SuccessResponse.data=airplanes;
+        
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+
+    } catch (error) {
+
+        ErrorResponse.message="Internal server error occurred:getAirplanes";
+        ErrorResponse.error=error;        
+
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse)
+    }
+}
+
+async function getAirplane(req, res){
+    try {
+        const id= req.params.id
+        const airplane = await AirplaneService.getAirplane(id);
+
+        SuccessResponse.message="Airplanes fetched successfully";
+        SuccessResponse.data=airplane;
         
         return res
                 .status(StatusCodes.OK)
@@ -51,5 +75,6 @@ async function getAirplanes(req, res){
 
 module.exports={
     createAirplane,
-    getAirplanes
+    getAirplanes,
+    getAirplane,
 }
