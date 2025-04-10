@@ -18,12 +18,25 @@ async function createAirplane(data){
             });
             console.log(explanation);
             
-            throw new AppError(explanation, StatusCodes.INTERNAL_SERVER_ERROR)
+            throw new AppError(explanation, StatusCodes.INTERNAL_SERVER_ERROR);
         }
         throw new AppError("Cannot create a new AIrplane object", StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
+//getAirplane will return all airplanes present
+
+async function getAirplanes(){
+    try {
+        const allAirplanes = await airplaneRepo.getAll();
+        return allAirplanes;
+    } catch (error) {
+        console.log(`error from services ${error}`);
+        throw new AppError("Cannot fetch Airplanes at this moment", StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 module.exports={
-    createAirplane
+    createAirplane,
+    getAirplanes,
 }

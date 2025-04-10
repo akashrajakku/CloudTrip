@@ -1,5 +1,3 @@
-const { logger } = require("../config");
-
 class CrudRepo {
     constructor(model){
         this.model=model;
@@ -30,7 +28,7 @@ class CrudRepo {
 
     async getAll(){ // It generates a standard SELECT query which will retrieve all entries from the table (unless restricted by something like a where clause, for example).
        
-            const response = await this.model.findByAll();
+            const response = await this.model.findAll();
             return response;
        
     }
