@@ -96,9 +96,49 @@ async function destroyAirplane(req, res){
     }
 }
 
+async function updateAirplane(req, res){
+    try {
+    //checking if req.body has any of the fields to update
+        if(!req.body){
+            ErrorResponse.message="Failed to update Airplane: updateAirplane";
+            ErrorResponse.error="Model number or capacity is required to update the airplane";
+            return res
+                    .status(StatusCodes.BAD_REQUEST)
+                    .json({
+                        ErrorResponse
+                    })
+        }
+
+        const modelNumber= req.body.modelNumber;
+        const capacity= req.body.capacity;
+        const id= req.params.id;
+        const updateDetails={};
+        if(modelNumber) updateDetails.modelNumber=modelNumber;
+        if(capacity) updateDetails.capacity=capacity;
+
+        const updatedAirplane = await AirplaneService.updateAirplane(id, updateDetails);
+        SuccessResponse.message="Airplane updated successfully";
+        SuccessResponse.data=updatedAirplane;
+
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+
+    } catch (error) {
+        ErrorResponse.message="Internal server error occurred:updateAirplane";
+        ErrorResponse.error=error;        
+
+        return res
+                .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+                .json(ErrorResponse)        
+    }
+    
+}
+
 module.exports={
     createAirplane,
     getAirplanes,
     getAirplane,
     destroyAirplane,
+    updateAirplane,
 }
